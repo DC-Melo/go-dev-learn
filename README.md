@@ -77,12 +77,48 @@ go: found rsc.io/quote in rsc.io/quote v1.5.2
 Don't communicate by sharing memory, share memory by communicating.
 ```
 
-
-
-
-
 ## Tutorial: Create a module
 A tutorial of short topics introducing functions, error handling, arrays, maps, unit testing, and compiling.
+
+
+- Create a greetings directory for your Go module source code.
+For example, from your home directory use the following commands:
+```sh
+❯ mkdir greetings
+❯ cd greetings
+❯ go mod init example.com/greetings
+go: creating new go.mod: module example.com/greetings
+```
+- Create file greetings.go
+```go
+package greetings
+
+import "fmt"
+
+// Hello returns a greeting for the named person.
+func Hello(name string) string {
+    // Return a greeting that embeds the name in a message.
+    message := fmt.Sprintf("Hi, %v. Welcome!", name)
+    return message
+}
+```
+
+- Call your code from another module
+```sh
+mkdir hello
+cd hello
+❯ go mod init example.com/hello
+go: creating new go.mod: module example.com/hello
+# Edit the example.com/hello module to use your local example.com/greetings module.
+$ go mod edit -replace example.com/greetings=../greetings
+$ go mod tidy
+❯ go run .
+Hi, Gladys. Welcome!
+```
+
+
+
+
 
 ## Tutorial: Getting started with multi-module workspaces
 Introduces the basics of creating and using multi-module workspaces in Go. Multi-module workspaces are useful for making changes across multiple modules.
