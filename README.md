@@ -19,7 +19,7 @@ go dev learn base on https://go.dev/learn/#tutorials
 Instructions for downloading and installing Go.
 
 ## Tutorial: Getting started
-- Create a hello directory for your first Go source code.
+- Create a hello directory for your first Go source code. Tag: v0.01.1
 For example, use the following commands:
 ```sh
 ❯ mkdir hello
@@ -50,6 +50,33 @@ Hello, World!
 ```sh
 $ go help
 ```
+- Call code in an external package. Tag: v0.01.2
+Change file name: hello.go
+
+```go
+package main
+
+import "fmt"
+
+import "rsc.io/quote"
+
+func main() {
+    fmt.Println(quote.Go())
+}
+
+```
+- Add new module requirements and sums.
+
+```sh
+# When you ran go mod tidy, it located and downloaded the rsc.io/quote module that contains the package you imported
+❯ go mod tidy
+go: finding module for package rsc.io/quote
+go: found rsc.io/quote in rsc.io/quote v1.5.2
+# run the code 
+❯ go run .
+Don't communicate by sharing memory, share memory by communicating.
+```
+
 
 
 
